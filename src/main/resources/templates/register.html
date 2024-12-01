@@ -1,0 +1,32 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Registrar usuario</title>
+        <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+        <script th:src="@{~/bootstrap/js/bootstrap.bundle.min.js}" defer></script>
+    </head>
+    <body>
+        <h1>Registro de Usuario</h1>
+
+        <form action="#" th:action="@{/auth/register}" th:object="${authUserDto}" method="post">
+            <label for="email">Nombre:</label>
+            <input type="text" id="email" th:field="*{email}"/><br/>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" th:field="*{password}"/><br/>
+
+            <label>Roles:</label>
+            <div th:each="role : ${roles}">
+                <input type="checkbox" th:field="*{roleIds}" th:value="${role.id}" th:text="${role.name}" />
+            </div>
+
+            <label for="enabled">Habilitado:</label>
+            <input type="checkbox" id="enabled" th:field="*{enabled}" /> <br/>
+
+            <button type="submit">Registrar</button>
+        </form>
+
+    </body>
+</html>

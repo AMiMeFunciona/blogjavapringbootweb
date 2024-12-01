@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Comentarios</title>
+        <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+        <script th:src="@{~/bootstrap/js/bootstrap.bundle.min.js}" defer></script>
+    </head>
+    <body>
+        <h1>Comentarios</h1>
+        <ul>
+            <li th:each="comment : ${comments}">
+                <a th:href="@{/comment/comments/detail/{commentId}(commentId=${comment.id})}"> Ver detalle comentario </a>
+                <p th:text="${comment.body}"></p>
+                <p th:text="${comment.publicationDate}"></p>
+                <p th:text="${comment.userEmail}"></p>
+            </li>
+
+        </ul>
+        <a th:href="@{/blog/getall}" class="btn btn-secondary">Regresar</a>
+    </body>
+</html>

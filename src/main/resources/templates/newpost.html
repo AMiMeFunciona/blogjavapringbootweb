@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nuevo Post</title>
+        <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+        <script th:src="@{~/bootstrap/js/bootstrap.bundle.min.js}" defer></script>
+    </head>
+    <body>
+        <h1>Nuevo Post</h1>
+        <form th:action="@{/blog/new}" method="post">
+            <div class="mb-3">
+                <label for="title" class="form-label">Título</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Cuerpo</label>
+                <textarea class="form-control" id="body" name="body" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Publicar</button>
+        </form>
+        <a th:href="@{/blog/getall}" class="btn btn-secondary">Regresar</a>
+    </body>
+</html>

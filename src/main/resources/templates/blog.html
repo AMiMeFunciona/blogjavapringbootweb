@@ -1,0 +1,38 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Blog</title>
+        <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+        <script th:src="@{~/bootstrap/js/bootstrap.bundle.min.js}" defer></script>
+    </head>
+    <body>
+        <h2>Busqueda:</h2>
+        <form th:action="@{/blog/searchposts}" method="GET">
+            <input type="text" name="title" placeholder="Busqueda por titulo">
+            <button type="submit">Buscar</button>
+        </form>
+        <hr />
+     <ul>
+         <li th:each="post: ${posts}">
+             <a th:href="@{/blog/posts/detail/{postId}(postId=${post.id})}">
+                 <h2 th:text="${post.title}"></h2>
+             </a>
+             <p th:text="${post.body}"></p>
+             <p th:text="${post.publicationDate}"></p>
+             <p th:text="${post.userEmail}"></p>
+             <p th:text="${post.commentCount > 0 ? post.commentCount : (post.comments != null ? post.comments.size() : 0)} + ' comentarios'"></p>
+             <a th:href="@{/comment/comments/{postId}(postId=${post.id})}" class="btn btn-secondary">Ver comentarios</a>
+             <a th:href="@{/comment/new/{postId}(postId=${post.id})}" class="btn btn-primary">Nuevo comentario</a>
+         </li>
+     </ul>
+
+    <form th:action="@{/auth/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+
+        <a th:href="@{/blog/new}" class="btn btn-primary">Nuevo Post</a>
+
+    </body>
+</html>

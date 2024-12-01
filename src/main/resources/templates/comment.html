@@ -1,0 +1,41 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Comment</title>
+        <link rel="stylesheet" th:href="@{~/bootstrap/css/bootstrap.min.css}">
+        <script th:src="@{~/bootstrap/js/bootstrap.bundle.min.js}" defer></script>
+        <script>
+            function enableEdit() {
+                document.getElementById("body").disabled = false;
+                document.getElementById("editButton").style.display = "none";
+                document.getElementById("saveButton").style.display = "inline-block";
+            }
+        </script>
+    </head>
+    <body>
+
+        <h1>Comment</h1>
+
+        <form th:action="@{/comment/update/{id}(id=${comment.id})}" method="post">
+            <input type="hidden" name="_method" value="PUT"/>
+            <label for="body">Body</label>
+            <textarea id="body" name="body" disabled th:text="${comment.body}"></textarea>
+            <p> Publicado el: <span th:text="${comment.publicationDate}"></span></p>
+            <p>Usuario: <span th:text="${comment.userEmail}"></span></p>
+            <button type="button" id="editButton" onclick="enableEdit()">Actualizar comment</button>
+            <button type="submit" id="saveButton" style="display: none;">Guardar</button>
+
+        </form>
+
+        <form th:action="@{/comment/delete/{postId}/{commentId}(postId=${comment.postId}, commentId=${comment.id})}"
+              method="post">
+            <input type="hidden" name="_method" value="delete"/>
+            <button type="submit">Eliminar</button>
+        </form>
+
+        <a th:href="@{/comment/comments/{postId}(postId=${comment.postId})}">Volver a los comentarios de este post</a>
+
+    </body>
+</html>
